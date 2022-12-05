@@ -48,7 +48,8 @@
           fetch('https://api.github.com/repos/stellaludai/stellaludai.github.io/contents/names.txt', {
             method: 'PUT',
             headers: {
-              'Authorization': `Bearer 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`, // Replace <TOKEN> with your personal access token
+              'Authorization': `Bearer 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`,
+              'Content-Type': 'application/json'
              },
             body: JSON.stringify(params)
           })
