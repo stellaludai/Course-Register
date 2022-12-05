@@ -1,0 +1,30 @@
+
+<html>
+  <body>
+<script>
+  // Create an event listener that listens for the 'load' event on the 'window' object
+  window.addEventListener('load', function() {
+    // Collect the visitor's information
+    var visitorInfo = {
+      'ipAddress': '',
+      'userAgent': '',
+      'referrer': ''
+    };
+
+    // Get the visitor's IP address
+    visitorInfo.ipAddress = window.RTCPeerConnection
+      ? (new RTCPeerConnection({iceServers:[]}).createDataChannel('',{reliable:false}).close())
+      : undefined;
+
+    // Get the visitor's user agent
+    visitorInfo.userAgent = navigator.userAgent;
+
+    // Get the visitor's referrer
+    visitorInfo.referrer = document.referrer;
+
+    // Print the visitor's information to the console
+    console.log(visitorInfo);
+  });
+</script>
+  </body>
+</html>
