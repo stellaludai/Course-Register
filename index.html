@@ -37,7 +37,7 @@
         .then(file => {
           // Append the user's name to the contents of the file
           let newContents = file.content + '\n' + nameInput.value;
-
+          console.log(newContents)
           // Set up the request parameters
           let params = {
             message: 'Appending name to names.txt file', // The commit message
