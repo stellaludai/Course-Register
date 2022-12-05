@@ -1,29 +1,63 @@
+<!DOCTYPE html>
 <html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Name Form</title>
+</head>
 <body>
+  <form id="name-form">
+    <label for="name-input">Enter your name:</label>
+    <input id="name-input" type="text" />
+    <button type="submit">Submit</button>
+  </form>
 
-<h1>Enter your name</h1>
+  <script>
+    // Get the name form
+    let nameForm = document.querySelector('#name-form');
 
-<form>
-  Name:<br>
-  <input type="text" id="name"><br><br>
-  <button type="submit" id="submit-btn">Submit</button>
-</form>
+    // Set up the submit event handler for the name form
+    nameForm.addEventListener('submit', function(event) {
+      // Prevent the form from being submitted
+      event.preventDefault();
 
-<script>
-  const submitBtn = document.getElementById('submit-btn');
-  const nameInput = document.getElementById('name');
+      // Get the name input
+      let nameInput = document.querySelector('#name-input');
 
-  submitBtn.addEventListener('click', async (event) => {
-    // Create a Blob object containing the data to be written to the file
-    let blob = new Blob(['Hello, world!'], { type: 'text/plain' });
+      // Get the current contents of the names file
+      fetch('https://api.github.com/repos/stellaludai/stellaludai.github.io/contents/names.txt')
+        .then(response => {
+          if (response.ok) {
+            return response.json();
+          } else {
+            console.error('Failed to get file contents from repository');
+          }
+        })
+        .then(file => {
+          // Append the user's name to the contents of the file
+          let newContents = file.content + '\n' + nameInput.value;
 
-    // Create a FileSaver object to save the file
-    let fileSaver = new FileSaver(blob, 'hello.txt');
+          // Set up the request parameters
+          let params = {
+            message: 'Appending name to names.txt file', // The commit message
+            content: btoa(newContents), // The updated file contents, encoded as base64
+            sha: file.sha // The SHA of the current file version
+          };
 
-    // Save the file
-    fileSaver.save();
-  });
-</script>
-
-</body>
-</html>
+          // Send a request to the GitHub API to update the file
+          fetch('https://api.github.com/repos/stellaludai/stellaludai.github.io/contents/names.txt', {
+            method: 'PUT',
+            body: JSON.stringify(params)
+          })
+            .then(response => {
+              if (response.ok) {
+                console.log('File was successfully updated in repository');
+              } else {
+                console.error('Failed to update file in repository');
+              }
+            })
+            .catch(error => {
+              console.error(error);
+            });
+        });
+    });
+  </script>
