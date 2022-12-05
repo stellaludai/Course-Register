@@ -14,29 +14,14 @@
   const nameInput = document.getElementById('name');
 
   submitBtn.addEventListener('click', async (event) => {
-    event.preventDefault();
-    const name = nameInput.value;
+    // Create a Blob object containing the data to be written to the file
+    let blob = new Blob(['Hello, world!'], { type: 'text/plain' });
 
-    try {
-      const response = await fetch('/saveName.php', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ name }),
-      });
+    // Create a FileSaver object to save the file
+    let fileSaver = new FileSaver(blob, 'hello.txt');
 
-      if (response.ok) {
-        // Name was successfully saved to the CSV file
-        alert('Name saved successfully!');
-      } else {
-        // There was an error saving the name to the CSV file
-        alert('Error saving name. Please try again.');
-      }
-    } catch (error) {
-      // There was an error making the request
-      alert('Error making request. Please try again.');
-    }
+    // Save the file
+    fileSaver.save();
   });
 </script>
 
