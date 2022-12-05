@@ -47,6 +47,9 @@
           // Send a request to the GitHub API to update the file
           fetch('https://api.github.com/repos/stellaludai/stellaludai.github.io/contents/names.txt', {
             method: 'PUT',
+            headers: {
+              'Authorization': `Bearer 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`, // Replace <TOKEN> with your personal access token
+             },
             body: JSON.stringify(params)
           })
             .then(response => {
