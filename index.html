@@ -36,7 +36,7 @@
         })
         .then(file => {
           // Append the user's name to the contents of the file
-          let newContents = file.content + '\n' + nameInput.value;
+          let newContents = atob(file.content) + '\n' + nameInput.value;
           console.log(newContents)
           // Set up the request parameters
           let params = {
