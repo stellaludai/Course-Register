@@ -1,3 +1,4 @@
+Copy code
 <html>
 <body>
 
@@ -9,12 +10,14 @@
   <input type="submit" value="Submit">
 </form>
 
+<?php
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $name = $_POST['name'];
+    $file = fopen('names.csv', 'a');
+    fwrite($file, $name . "\n");
+    fclose($file);
+  }
+?>
+
 </body>
 </html>
-
-<?php
-  $name = $_POST['name'];
-  $file = fopen('names.csv', 'a');
-  fwrite($file, $name . "\n");
-  fclose($file);
-?>
