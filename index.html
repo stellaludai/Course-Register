@@ -3,20 +3,42 @@
 
 <h1>Enter your name</h1>
 
-<form action="saveName.php" method="post">
+<form>
   Name:<br>
-  <input type="text" name="name"><br><br>
-  <input type="submit" value="Submit">
+  <input type="text" id="name"><br><br>
+  <button type="submit" id="submit-btn">Submit</button>
 </form>
 
-<?php
-  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = $_POST['name'];
-    $file = fopen('names.csv', 'a');
-    fwrite($file, $name . "\n");
-    fclose($file);
-  }
-?>
+<script>
+  const submitBtn = document.getElementById('submit-btn');
+  const nameInput = document.getElementById('name');
+
+  submitBtn.addEventListener('click', async (event) => {
+    event.preventDefault();
+    const name = nameInput.value;
+
+    try {
+      const response = await fetch('/saveName.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ name }),
+      });
+
+      if (response.ok) {
+        // Name was successfully saved to the CSV file
+        alert('Name saved successfully!');
+      } else {
+        // There was an error saving the name to the CSV file
+        alert('Error saving name. Please try again.');
+      }
+    } catch (error) {
+      // There was an error making the request
+      alert('Error making request. Please try again.');
+    }
+  });
+</script>
 
 </body>
 </html>
