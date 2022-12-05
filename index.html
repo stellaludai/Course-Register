@@ -9,26 +9,29 @@
   </body>
 </html>
 
-<!-- Load the fs module in Node.js -->
+<!-- Use the FileSystem object in the Web File System API to save the visitor's name to a local CSV file -->
 <script>
-var fs = require('fs');
+  // Create an event listener that listens for the 'submit' event on the form
+  document.querySelector('form').addEventListener('submit', function(e) {
+    // Prevent the form from being submitted
+    e.preventDefault();
 
-// Create an event listener that listens for the 'submit' event on the form
-document.querySelector('form').addEventListener('submit', function(e) {
-  // Prevent the form from being submitted
-  e.preventDefault();
+    // Request access to the local file system
+    window.requestFileSystem(window.TEMPORARY, 1024 * 1024, function(fs) {
+      // Get the visitor's name from the input box
+      var name = document.querySelector('#name').value;
 
-  // Get the visitor's name from the input box
-  var name = document.querySelector('#name').value;
-
-  // Save the name to a local CSV file named "names.csv"
-  fs.appendFile('names.csv', name + '\n', function(err) {
-    if (err) {
-      console.error(err);
-    } else {
-      console.log('Name saved successfully!');
-    }
+      // Save the name to a local CSV file named "names.csv"
+      fs.root.getFile('names.csv', {create: true}, function(fileEntry) {
+        fileEntry.createWriter(function(fileWriter) {
+          fileWriter.seek(fileWriter.length);
+          var blob = new Blob([name + '\n'], {type: 'text/plain'});
+          fileWriter.write(blob);
+          console.log('Name saved successfully!');
+        }, function(err) {
+          console.error(err);
+        });
+      });
+    });
   });
-});
 </script>
-
