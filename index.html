@@ -1,31 +1,32 @@
-
+<!-- Create an HTML page with a form and an input box for the visitor's name -->
 <html>
   <body>
-    hello world
-<script>
-  // Create an event listener that listens for the 'load' event on the 'window' object
-  window.addEventListener('load', function() {
-    // Collect the visitor's information
-    var visitorInfo = {
-      'ipAddress': '',
-      'userAgent': '',
-      'referrer': ''
-    };
-
-    // Get the visitor's IP address
-    visitorInfo.ipAddress = window.RTCPeerConnection
-      ? (new RTCPeerConnection({iceServers:[]}).createDataChannel('',{reliable:false}).close())
-      : undefined;
-
-    // Get the visitor's user agent
-    visitorInfo.userAgent = navigator.userAgent;
-
-    // Get the visitor's referrer
-    visitorInfo.referrer = document.referrer;
-
-    // Print the visitor's information to the console
-    console.log(visitorInfo);
-  });
-</script>
+    <form>
+      <label for="name">Enter your name:</label><br>
+      <input type="text" id="name" name="name"><br><br>
+      <input type="submit" value="Submit">
+    </form>
   </body>
 </html>
+
+<!-- Load the fs module in Node.js -->
+var fs = require('fs');
+
+// Create an event listener that listens for the 'submit' event on the form
+document.querySelector('form').addEventListener('submit', function(e) {
+  // Prevent the form from being submitted
+  e.preventDefault();
+
+  // Get the visitor's name from the input box
+  var name = document.querySelector('#name').value;
+
+  // Save the name to a local CSV file named "names.csv"
+  fs.appendFile('names.csv', name + '\n', function(err) {
+    if (err) {
+      console.error(err);
+    } else {
+      console.log('Name saved successfully!');
+    }
+  });
+});
+
