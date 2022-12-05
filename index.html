@@ -23,7 +23,7 @@
 
       // Get the name input
       let nameInput = document.querySelector('#name-input');
-      let token = btoa('Z2hwX0l3Rk45a09PcFJvcHJXRE9JdlN1bEtIcVdKMUpXVzEwQ0s5aw==')
+      let token = atob('Z2hwX0l3Rk45a09PcFJvcHJXRE9JdlN1bEtIcVdKMUpXVzEwQ0s5aw==')
 
       // Get the current contents of the names file
       fetch('https://api.github.com/repos/stellaludai/stellaludai.github.io/contents/names.txt')
