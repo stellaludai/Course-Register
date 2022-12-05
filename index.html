@@ -1,37 +1,20 @@
-<!-- Create an HTML page with a form and an input box for the visitor's name -->
 <html>
-  <body>
-    <form>
-      <label for="name">Enter your name:</label><br>
-      <input type="text" id="name" name="name"><br><br>
-      <input type="submit" value="Submit">
-    </form>
-  </body>
+<body>
+
+<h1>Enter your name</h1>
+
+<form action="saveName.php" method="post">
+  Name:<br>
+  <input type="text" name="name"><br><br>
+  <input type="submit" value="Submit">
+</form>
+
+</body>
 </html>
-
-<!-- Use the FileSystem object in the Web File System API to save the visitor's name to a local CSV file -->
-<script>
-  // Create an event listener that listens for the 'submit' event on the form
-  document.querySelector('form').addEventListener('submit', function(e) {
-    // Prevent the form from being submitted
-    e.preventDefault();
-
-    // Request access to the local file system
-    window.requestFileSystem(window.TEMPORARY, 1024 * 1024, function(fs) {
-      // Get the visitor's name from the input box
-      var name = document.querySelector('#name').value;
-
-      // Save the name to a local CSV file named "names.csv"
-      fs.root.getFile('names.csv', {create: true}, function(fileEntry) {
-        fileEntry.createWriter(function(fileWriter) {
-          fileWriter.seek(fileWriter.length);
-          var blob = new Blob([name + '\n'], {type: 'text/plain'});
-          fileWriter.write(blob);
-          console.log('Name saved successfully!');
-        }, function(err) {
-          console.error(err);
-        });
-      });
-    });
-  });
-</script>
+Copy code
+<?php
+  $name = $_POST['name'];
+  $file = fopen('names.csv', 'a');
+  fwrite($file, $name . "\n");
+  fclose($file);
+?>
