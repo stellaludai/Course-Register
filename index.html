@@ -10,7 +10,7 @@
     }
       form {
         width: 500px;
-        height: 200px;
+        height: 150px;
         background-color: lightblue;
         margin: auto;
         padding: 20px;
@@ -98,8 +98,9 @@
             .then(response => {
               if (response.ok) {
                 console.log('File was successfully updated in repository');
-                responseSubmit.textContent = `$Hi {nameInput.value}, Thank you for your participation!`
+                responseSubmit.textContent = `Hi ${nameInput.value}, Thank you for your participation!`
               } else {
+                responseSubmit.textContent = `Upload failed. please reload the website and retry.(sorry it's not stable)`
                 console.error('Failed to update file in repository');
               }
             })
