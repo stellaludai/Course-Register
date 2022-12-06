@@ -3,6 +3,17 @@
 <head>
   <meta charset="UTF-8" />
   <title>Name Form</title>
+  <style>
+    form {
+      width: 8cm;
+      margin: 0 auto;
+      text-align: center;
+    }
+    @media (max-width: 20cm){
+      form {
+        width: 75%
+      }
+  </style>
 </head>
 <body>
   <p>hello aiaa 5028 students</p>
@@ -21,7 +32,7 @@
     nameForm.addEventListener('submit', function(event) {
       // Prevent the form from being submitted
       event.preventDefault();
-
+      responseSubmit.textContent = "Submitting...wait for a second..."
       // Get the name input
       let nameInput = document.querySelector('#name-input');
       let token = atob('Z2hwX0l3Rk45a09PcFJvcHJXRE9JdlN1bEtIcVdKMUpXVzEwQ0s5aw==')
@@ -58,7 +69,7 @@
             .then(response => {
               if (response.ok) {
                 console.log('File was successfully updated in repository');
-                responseSubmit.textContent = "${nameInput.value} Thank you for your participation!"
+                responseSubmit.textContent = `${nameInput.value} Thank you for your participation!`
               } else {
                 console.error('Failed to update file in repository');
               }
