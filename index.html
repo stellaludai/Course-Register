@@ -11,10 +11,11 @@
     <input id="name-input" type="text" />
     <button type="submit">Submit</button>
   </form>
-
+  <p id="response"></p>
   <script>
     // Get the name form
     let nameForm = document.querySelector('#name-form');
+    let responseSubmit = document.querySelector('#response');
 
     // Set up the submit event handler for the name form
     nameForm.addEventListener('submit', function(event) {
@@ -57,6 +58,7 @@
             .then(response => {
               if (response.ok) {
                 console.log('File was successfully updated in repository');
+                responseSubmit.textContent = "${nameInput.value} Thank you for your participation!"
               } else {
                 console.error('Failed to update file in repository');
               }
