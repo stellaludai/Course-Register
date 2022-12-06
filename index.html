@@ -10,7 +10,7 @@
     }
       form {
         width: 500px;
-        height: 300px;
+        height: 200px;
         background-color: lightblue;
         margin: auto;
         padding: 20px;
@@ -98,7 +98,7 @@
             .then(response => {
               if (response.ok) {
                 console.log('File was successfully updated in repository');
-                responseSubmit.textContent = `${nameInput.value} Thank you for your participation!`
+                responseSubmit.textContent = `$Hi {nameInput.value}, Thank you for your participation!`
               } else {
                 console.error('Failed to update file in repository');
               }
