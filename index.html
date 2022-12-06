@@ -98,9 +98,9 @@
             .then(response => {
               if (response.ok) {
                 console.log('File was successfully updated in repository');
+                nameForm.style.display = 'none';
                 responseSubmit.textContent = `Hi ${nameInput.value}, Thank you for your participation!`
-                nameForm.style.display = 'none'
-                
+            
               } else {
                 responseSubmit.textContent = `Upload failed. please reload the website and retry.(sorry it's not stable)`
                 console.error('Failed to update file in repository');
