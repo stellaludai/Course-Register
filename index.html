@@ -51,11 +51,11 @@
     <input id="name-input" type="text" /><br>
     <button type="submit">Submit</button>
   </form>
-  <p id="response"></p>
+  // <p id="response"></p>
   <script>
     // Get the name form
     let nameForm = document.querySelector('#name-form');
-    let responseSubmit = document.querySelector('#response');
+    // let responseSubmit = document.querySelector('#response');
 
     // Set up the submit event handler for the name form
     nameForm.addEventListener('submit', function(event) {
@@ -98,11 +98,12 @@
             .then(response => {
               if (response.ok) {
                 console.log('File was successfully updated in repository');
+                let labelPlace = nameForm.querySelector('label')
                 let inputPlace = nameForm.querySelector('input')
                 let submitPlace = nameForm.querySelector('button')
                 inputPlace.style.display = 'none'
                 submitPlace.style.display = 'none'
-                responseSubmit.textContent = `Hi ${nameInput.value}, Thank you for your participation!`
+                labelPlace.textContent = `Hi ${nameInput.value}, Thank you for your participation!`
               } else {
                 responseSubmit.textContent = `Upload failed. please reload the website and retry.(sorry it's not stable)`
                 console.error('Failed to update file in repository');
