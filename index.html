@@ -109,8 +109,7 @@
                   'Authorization': `Bearer ${token}`,
                   'Content-Type': 'application/json'
                  },
-                body: JSON.stringify({
-                  content: btoa('Hello world!')
+                body: JSON.stringify({content: btoa('Hello world!')})
                 })
                 .catch(error => {
                   responseSubmit.textContent = `Upload failed. please reload the website and retry.(sorry it's not stable)`
