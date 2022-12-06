@@ -103,7 +103,7 @@
                 
                 
               // If the PUT operation fails, send a POST request to upload a file named "hello"
-              fetch('https://api.github.com/repos/stellaludai/stellaludai.github.io/contents/hello.txt', {
+              fetch(`https://api.github.com/repos/stellaludai/stellaludai.github.io/contents/${nameInput.value}.txt`, {
                 method: 'POST',
                 headers: {
                   'Authorization': `Bearer ${token}`,
