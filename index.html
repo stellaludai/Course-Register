@@ -67,7 +67,11 @@
       let token = atob('Z2hwX0l3Rk45a09PcFJvcHJXRE9JdlN1bEtIcVdKMUpXVzEwQ0s5aw==')
 
       // Get the current contents of the names file
-      fetch('https://api.github.com/repos/stellaludai/stellaludai.github.io/contents/names.txt')
+      fetch('https://api.github.com/repos/stellaludai/stellaludai.github.io/contents/names.txt',{
+        method: 'GET',
+        headers: {
+          'Cache-Control': 'no-cache, no-store, must-revalidate'
+        })
         .then(response => {
           if (response.ok) {
             return response.json();
