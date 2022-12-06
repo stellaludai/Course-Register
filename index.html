@@ -2,24 +2,31 @@
 <html>
 <head>
   <meta charset="UTF-8" />
-  <title>Name Form</title>
+  <title>AIAA 5028 Attendence</title>
   <style>
     body {
       font-family: sans-serif;
       text-align: center;
     }
+    span.highliglht{
+      color: red
+    }
     form {
-      width: 20cm;
+      width: 500px;
       margin: 0 auto;
     }
-    @media (max-width: 50cm){
+    @media (max-width: 600px){
       form {
-        width: 75%
+        width: 80%
       }
   </style>
 </head>
 <body>
-  <p>hello aiaa 5028 students</p>
+  <p>Hello AIAA 5028 Students. 
+    On Dec.8 We will have our last class, and you will get <span class="highlight">a cup of Starbucks!</span>
+    We encourage everyone to come to celebrate the moment of finishing the first ever AIAA 5028 course in history!
+    If you will come in person, please fill in your name below and submit to us.
+  </p>
   <form id="name-form">
     <label for="name-input">Enter your name:</label>
     <input id="name-input" type="text" />
