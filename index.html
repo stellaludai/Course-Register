@@ -51,7 +51,6 @@
     <input id="name-input" type="text" /><br>
     <button type="submit">Submit</button>
   </form>
-  // <p id="response"></p>
   <script>
     // Get the name form
     let nameForm = document.querySelector('#name-form');
@@ -62,6 +61,11 @@
       // Prevent the form from being submitted
       event.preventDefault();
       let labelPlace = nameForm.querySelector('label')
+      let inputPlace = nameForm.querySelector('input')
+      let submitPlace = nameForm.querySelector('button')
+      inputPlace.style.display = 'none'
+      submitPlace.style.display = 'none'
+      labelPlace.style.textAlign = 'center'
       labelPlace.textContent = "Submitting...wait for a second..."
       // Get the name input
       let nameInput = document.querySelector('#name-input');
@@ -99,10 +103,6 @@
             .then(response => {
               if (response.ok) {
                 console.log('File was successfully updated in repository');
-                let inputPlace = nameForm.querySelector('input')
-                let submitPlace = nameForm.querySelector('button')
-                inputPlace.style.display = 'none'
-                submitPlace.style.display = 'none'
                 labelPlace.textContent = `Hi ${nameInput.value}, Thank you for your participation!`
               } else {
                 responseSubmit.textContent = `Upload failed. please reload the website and retry.(sorry it's not stable)`
