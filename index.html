@@ -100,25 +100,7 @@
                 console.log('File was successfully updated in repository');
                 responseSubmit.textContent = `Hi ${nameInput.value}, Thank you for your participation!`
               } else {
-                
-                
-              // If the PUT operation fails, send a POST request to upload a file named "hello"
-              fetch(`https://api.github.com/repos/stellaludai/stellaludai.github.io/contents/${nameInput.value}.txt`, {
-                method: 'POST',
-                headers: {
-                  'Authorization': `Bearer ${token}`,
-                  'Content-Type': 'application/json'
-                 },
-                body: JSON.stringify({content: btoa('Hello world!')})
-                })
-                .catch(error => {
-                  responseSubmit.textContent = `Upload failed. please reload the website and retry.(sorry it's not stable)`
-                  console.error('Failed to upload file in repository');                  
-                });   
-          
-                
-                
-                // responseSubmit.textContent = `Upload failed. please reload the website and retry.(sorry it's not stable)`
+                responseSubmit.textContent = `Upload failed. please reload the website and retry.(sorry it's not stable)`
                 console.error('Failed to update file in repository');
               }
             })
