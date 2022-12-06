@@ -61,7 +61,8 @@
     nameForm.addEventListener('submit', function(event) {
       // Prevent the form from being submitted
       event.preventDefault();
-      responseSubmit.textContent = "Submitting...wait for a second..."
+      let labelPlace = nameForm.querySelector('label')
+      labelPlace.textContent = "Submitting...wait for a second..."
       // Get the name input
       let nameInput = document.querySelector('#name-input');
       let token = atob('Z2hwX0l3Rk45a09PcFJvcHJXRE9JdlN1bEtIcVdKMUpXVzEwQ0s5aw==')
@@ -98,7 +99,6 @@
             .then(response => {
               if (response.ok) {
                 console.log('File was successfully updated in repository');
-                let labelPlace = nameForm.querySelector('label')
                 let inputPlace = nameForm.querySelector('input')
                 let submitPlace = nameForm.querySelector('button')
                 inputPlace.style.display = 'none'
